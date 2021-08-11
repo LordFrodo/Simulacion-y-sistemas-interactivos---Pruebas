@@ -70,4 +70,15 @@ public class MyVector2D
     {
         return ("Vector = (" + x + " , " + y + ")");
     }
+    public MyVector2D Lerp(MyVector2D vector_a,MyVector2D vector_b,float constant)
+    {
+        MyVector2D difference = new MyVector2D(0f, 0f);
+        MyVector2D temp = new MyVector2D(0f, 0f);
+        MyVector2D finish = new MyVector2D(0f, 0f);
+        difference = difference.Substract(vector_a, vector_b);
+        temp = temp.Multiply_Constant(constant, difference);
+        finish = finish.Substract(vector_a, temp);
+        return finish;
+
+    }
 }
