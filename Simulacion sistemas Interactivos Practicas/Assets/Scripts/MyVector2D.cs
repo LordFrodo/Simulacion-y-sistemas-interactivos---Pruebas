@@ -75,9 +75,9 @@ public class MyVector2D
         MyVector2D difference = new MyVector2D(0f, 0f);
         MyVector2D temp = new MyVector2D(0f, 0f);
         MyVector2D finish = new MyVector2D(0f, 0f);
-        difference = difference.Substract(vector_a, vector_b);
+        difference = difference.Substract(vector_b, vector_a);
         temp = temp.Multiply_Constant(constant, difference);
-        finish = finish.Substract(vector_a, temp);
+        finish = finish.Sum(vector_a, temp);
         return finish;
 
     }
