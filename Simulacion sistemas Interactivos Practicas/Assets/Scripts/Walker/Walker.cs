@@ -37,14 +37,18 @@ public class Walker : MonoBehaviour
             velocity.X = -velocity.X;
             //aceleration.X = -aceleration.X;
         }
-        //Normalizo la velocidad
-        velocity = velocity.Normalize(velocity);
-        velocity = velocity.Multiply_Constant(vel_max, velocity);
+        
         //Acelera el vector velocidad
         velocity.Y += aceleration.Y * Time.deltaTime;
         velocity.X += aceleration.X * Time.deltaTime;
 
-
+        //Ajuste Vel max
+        velocity.Magnitude_Calculate(velocity);
+        if (velocity.Magnitude > vel_max)
+        {
+            velocity = velocity.Normalize(velocity);
+            velocity = velocity.Multiply_Constant(vel_max, velocity);
+        }
 
         //Agrego velocidad
         position.Y += velocity.Y * Time.deltaTime;
