@@ -158,16 +158,16 @@ MonoBehaviour:
     x: 0
   velocity:
     y: 0
-    x: 1
+    x: 0
   aceleration:
-    y: 1
-    x: 1
+    y: -9.8
+    x: 0
   health: 0
   max_Y_displacement: 4.5
   max_X_displacement: 4.5
   min_Y_displacement: -4.5
   min_X_displacement: -4.5
-  vel_max: 2
+  vel_max: 4
 --- !u!212 &882486867
 SpriteRenderer:
   m_ObjectHideFlags: 0
