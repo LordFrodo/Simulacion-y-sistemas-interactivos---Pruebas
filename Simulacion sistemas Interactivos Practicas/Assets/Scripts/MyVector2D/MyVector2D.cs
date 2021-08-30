@@ -12,8 +12,8 @@ public class MyVector2D
 
     public float Magnitude { get => magnitude; set => magnitude = value; }
     public float Direction { get => direction; set => direction = value; }
-    public float X { get => x;  }
-    public float Y { get => y; }
+    public float X { get => x; set => x = value; }
+    public float Y { get => y; set => y = value; }
 
     public MyVector2D(float x, float y)
     {
