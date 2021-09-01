@@ -5,8 +5,9 @@ using UnityEngine;
 public class Walker : MonoBehaviour
 {
     public MyVector2D position, velocity, aceleration;
-    [SerializeField] float health, max_Y_displacement, max_X_displacement, min_Y_displacement, min_X_displacement, vel_max;
-    bool acelerate = true;
+    [SerializeField] float  max_Y_displacement, max_X_displacement, min_Y_displacement, min_X_displacement, vel_max;
+    [Range(0, 1)]
+    [SerializeField] float bouncingness_factor;
 
     // Start is called before the first frame update
 
@@ -29,12 +30,12 @@ public class Walker : MonoBehaviour
     {
         if (position.Y >= max_Y_displacement || position.Y <= min_Y_displacement)
         {
-            velocity.Y = -velocity.Y;
+            velocity.Y = -velocity.Y*bouncingness_factor;
             //aceleration.Y = -aceleration.Y;
         }
         if (position.X >= max_X_displacement || position.X <= min_X_displacement)
         {
-            velocity.X = -velocity.X;
+            velocity.X = -velocity.X*bouncingness_factor;
             //aceleration.X = -aceleration.X;
         }
         
