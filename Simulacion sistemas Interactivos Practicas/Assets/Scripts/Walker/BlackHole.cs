@@ -9,6 +9,7 @@ public class BlackHole : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] float bouncingness_factor;
     [SerializeField] GameObject black_hole;
+    
 
     // Start is called before the first frame update
 
@@ -28,7 +29,6 @@ public class BlackHole : MonoBehaviour
         transform.position = new Vector3(position.X, position.Y, 0);
         aceleration.X = aceleration.Substract(black_hole_position, position).X;
         aceleration.Y = aceleration.Substract(black_hole_position, position).Y;
-
 
     }
     public void UpdatePosition()
