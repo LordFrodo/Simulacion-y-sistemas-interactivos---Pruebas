@@ -4947,7 +4947,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &882486866
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5047,7 +5047,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882486865}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3514b4816b0059e4c95d0e50a30ea5e1, type: 3}
   m_Name: 
@@ -5191,6 +5191,7 @@ GameObject:
   - component: {fileID: 1087437774}
   - component: {fileID: 1087437773}
   - component: {fileID: 1087437777}
+  - component: {fileID: 1087437778}
   m_Layer: 0
   m_Name: Walker (1)
   m_TagString: Untagged
@@ -5205,7 +5206,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087437772}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3514b4816b0059e4c95d0e50a30ea5e1, type: 3}
   m_Name: 
@@ -5428,6 +5429,49 @@ TrailRenderer:
   m_MinVertexDistance: 0.12
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &1087437778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087437772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04337e9774365df41b07227d5e0f1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position:
+    y: 0
+    x: 3
+  velocity:
+    y: 0
+    x: 0
+  aceleration:
+    y: 0
+    x: 0
+  max_Y_displacement: 4.5
+  max_X_displacement: 4.5
+  min_Y_displacement: -4.5
+  min_X_displacement: -4.5
+  vel_max: 30
+  bouncingness_factor: 0.33
+  force:
+    y: 10
+    x: 0
+  air_force:
+    y: 0
+    x: 3
+  accumulated_force:
+    y: 0
+    x: 0
+  gravity:
+    y: -9.8
+    x: 0
+  weight:
+    y: 0
+    x: 0
+  mass: 10
 --- !u!1 &1348689128
 GameObject:
   m_ObjectHideFlags: 0
@@ -5528,7 +5572,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1998772615
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5617,9 +5661,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2022438453}
   - component: {fileID: 2022438452}
-  - component: {fileID: 2022438451}
   - component: {fileID: 2022438450}
   - component: {fileID: 2022438454}
+  - component: {fileID: 2022438456}
   m_Layer: 0
   m_Name: Walker (2)
   m_TagString: Untagged
@@ -5634,7 +5678,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022438449}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3514b4816b0059e4c95d0e50a30ea5e1, type: 3}
   m_Name: 
@@ -5658,33 +5702,6 @@ MonoBehaviour:
   vel_max: 10
   bouncingness_factor: 0.474
   black_hole: {fileID: 1998772614}
---- !u!114 &2022438451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022438449}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6636389a9aa430b49a4f83979830c217, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  position:
-    y: 0
-    x: 0
-  velocity:
-    y: 0
-    x: 0
-  aceleration:
-    y: 0
-    x: 0
-  max_Y_displacement: 4.5
-  max_X_displacement: 4.5
-  min_Y_displacement: -4.5
-  min_X_displacement: -4.5
-  vel_max: 10
-  bouncingness_factor: 0.488
 --- !u!212 &2022438452
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5857,3 +5874,46 @@ TrailRenderer:
   m_MinVertexDistance: 0.12
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &2022438456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022438449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04337e9774365df41b07227d5e0f1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position:
+    y: 0
+    x: 0
+  velocity:
+    y: 0
+    x: 0
+  aceleration:
+    y: 0
+    x: 0
+  max_Y_displacement: 4.5
+  max_X_displacement: 4.5
+  min_Y_displacement: -4.5
+  min_X_displacement: -4.5
+  vel_max: 30
+  bouncingness_factor: 0.33
+  force:
+    y: 10
+    x: 0
+  air_force:
+    y: 0
+    x: 0
+  accumulated_force:
+    y: 0
+    x: 0
+  gravity:
+    y: -9.8
+    x: 0
+  weight:
+    y: 0
+    x: 0
+  mass: 2

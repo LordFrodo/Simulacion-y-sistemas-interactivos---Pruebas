@@ -2,43 +2,37 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Walker : MonoBehaviour
+public class WalkerForce : Walker
 {
-    public MyVector2D position, velocity, aceleration;
-    [SerializeField] protected float  max_Y_displacement, max_X_displacement, min_Y_displacement, min_X_displacement, vel_max;
-    [Range(0, 1)]
-    [SerializeField] protected float bouncingness_factor;
+    [SerializeField] MyVector2D force, air_force, accumulated_force, gravity, weight;
+    [SerializeField] float mass;
 
-    // Start is called before the first frame update
-
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        UpdatePosition();
-        position.DrawMyVector(position, Color.red);
-        position.DrawMyVector(velocity, position, Color.blue);
-        position.DrawMyVector(aceleration, position, Color.yellow);
-        if (position.Y > max_Y_displacement && position.X > max_X_displacement)
-        {
-            transform.position = new Vector3(5, 5, 0);
-        }
-        transform.position = new Vector3(position.X, position.Y, 0);
-
-
+        weight.X = gravity.X * mass;
+        weight.Y = gravity.Y * mass;
     }
-    public virtual void UpdatePosition()
+    public void ApplyForce(MyVector2D force)
     {
+        accumulated_force.X += force.X/mass;
+        accumulated_force.Y += force.Y / mass;
+    }
+    public override void UpdatePosition()
+    {
+        aceleration.X = 0;
+        aceleration.Y = 0;
         if (position.Y >= max_Y_displacement || position.Y <= min_Y_displacement)
         {
-            velocity.Y = -velocity.Y*bouncingness_factor;
-            //aceleration.Y = -aceleration.Y;
+            velocity.Y = -velocity.Y * bouncingness_factor;
         }
         if (position.X >= max_X_displacement || position.X <= min_X_displacement)
         {
-            velocity.X = -velocity.X*bouncingness_factor;
-            //aceleration.X = -aceleration.X;
+            velocity.X = -velocity.X * bouncingness_factor;
         }
-        
+        ApplyForce(force);
+        ApplyForce(air_force);
+        accumulated_force = accumulated_force.Sum(accumulated_force, weight);
+        aceleration = accumulated_force;
         //Acelera el vector velocidad
         velocity.Y += aceleration.Y * Time.deltaTime;
         velocity.X += aceleration.X * Time.deltaTime;
@@ -70,6 +64,17 @@ public class Walker : MonoBehaviour
         {
             position.Y = min_Y_displacement;
         }
-        //transform.position += temp;
+    }
+    private void Update()
+    {
+        UpdatePosition();
+        position.DrawMyVector(position, Color.red);
+        position.DrawMyVector(velocity, position, Color.blue);
+        position.DrawMyVector(aceleration, position, Color.yellow);
+        if (position.Y > max_Y_displacement && position.X > max_X_displacement)
+        {
+            transform.position = new Vector3(5, 5, 0);
+        }
+        transform.position = new Vector3(position.X, position.Y, 0);
     }
 }
