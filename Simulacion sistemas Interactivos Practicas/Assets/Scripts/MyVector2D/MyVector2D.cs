@@ -49,7 +49,7 @@ public class MyVector2D
     }
     public MyVector2D Normalize(MyVector2D vector)
     {
-        if (vector.Magnitude == 0) vector.magnitude = Magnitude_Calculate(vector);
+        if (vector.Magnitude == 0) vector.magnitude = 1;
         MyVector2D temp = new MyVector2D(0, 0);
         temp.x = vector.x / vector.Magnitude;
         temp.y = vector.y / vector.Magnitude;

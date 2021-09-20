@@ -1,21 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class WalkerForce : Walker
+public class WaterFriction : WalkerForce
 {
-    [SerializeField] protected MyVector2D force, friction, accumulated_force, gravity, weight;
-    [SerializeField] protected float mass, coefficient_friction, normal_force;
-
-    void Start()
+    [SerializeField] MyVector2D water_friction;
+    [SerializeField] float coefficient_fluids, fluid_density, frontal_area;
+    bool on_fluid;
+    
+    public void Start()
     {
+        FluidInteractions.On_fluid_event += Fluid_interaction;
         weight.X = gravity.X * mass;
         weight.Y = gravity.Y * mass;
-    }
-    public void ApplyForce(MyVector2D force)
-    {
-        accumulated_force.X += force.X/mass;
-        accumulated_force.Y += force.Y / mass;
     }
     public override void UpdatePosition()
     {
@@ -29,18 +25,18 @@ public class WalkerForce : Walker
         {
             velocity.X = -velocity.X * bouncingness_factor;
         }
-         friction.X = -coefficient_friction * normal_force * friction.Normalize(velocity).X;
-         friction.Y = -coefficient_friction * normal_force * friction.Normalize(velocity).Y;
-        ApplyForce(friction);
+        water_friction.X = -0.5f * fluid_density * velocity.X * velocity.X * frontal_area * coefficient_fluids * water_friction.Normalize(velocity).X;
+        water_friction.Y = -0.5f * fluid_density * velocity.Y * velocity.Y * frontal_area * coefficient_fluids * water_friction.Normalize(velocity).Y;
+        if(on_fluid)ApplyForce(water_friction);
         ApplyForce(force);
-        
+
         accumulated_force = accumulated_force.Sum(accumulated_force, weight);
         aceleration = accumulated_force;
         //Acelera el vector velocidad
         velocity.Y += aceleration.Y * Time.deltaTime;
         velocity.X += aceleration.X * Time.deltaTime;
 
-      
+
 
         //Ajuste Vel max
         velocity.Magnitude_Calculate(velocity);
@@ -82,5 +78,8 @@ public class WalkerForce : Walker
         }
         transform.position = new Vector3(position.X, position.Y, 0);
     }
-    
+    public void Fluid_interaction()
+    {
+        on_fluid = !on_fluid;
+    }
 }

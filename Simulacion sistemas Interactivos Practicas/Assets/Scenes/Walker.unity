@@ -5192,6 +5192,9 @@ GameObject:
   - component: {fileID: 1087437773}
   - component: {fileID: 1087437777}
   - component: {fileID: 1087437778}
+  - component: {fileID: 1087437782}
+  - component: {fileID: 1087437781}
+  - component: {fileID: 1087437779}
   m_Layer: 0
   m_Name: Walker (1)
   m_TagString: Untagged
@@ -5436,7 +5439,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1087437772}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04337e9774365df41b07227d5e0f1f52, type: 3}
   m_Name: 
@@ -5459,9 +5462,9 @@ MonoBehaviour:
   force:
     y: 10
     x: 0
-  air_force:
+  friction:
     y: 0
-    x: 3
+    x: 0
   accumulated_force:
     y: 0
     x: 0
@@ -5472,6 +5475,87 @@ MonoBehaviour:
     y: 0
     x: 0
   mass: 10
+  coefficient_friction: 1
+  normal_force: 30
+--- !u!58 &1087437779
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087437772}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.32
+--- !u!114 &1087437781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087437772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff210f0474b7c542ab97351c8e258eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1087437782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087437772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe19a83a6b3705a438c02a2630d22a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position:
+    y: 0
+    x: 0
+  velocity:
+    y: 0
+    x: 0
+  aceleration:
+    y: 0
+    x: 0
+  max_Y_displacement: 4.5
+  max_X_displacement: 4.5
+  min_Y_displacement: -4.5
+  min_X_displacement: -4.5
+  vel_max: 100
+  bouncingness_factor: 0.995
+  force:
+    y: 0
+    x: 0
+  friction:
+    y: 0
+    x: 0
+  accumulated_force:
+    y: 0
+    x: 0
+  gravity:
+    y: -9.8
+    x: 0
+  weight:
+    y: 0
+    x: 0
+  mass: 20
+  coefficient_friction: 0
+  normal_force: 0
+  water_friction:
+    y: 0
+    x: 0
+  coefficient_fluids: 1
+  fluid_density: 1
+  frontal_area: 1
 --- !u!1 &1348689128
 GameObject:
   m_ObjectHideFlags: 0
@@ -5554,6 +5638,115 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1548001839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1548001842}
+  - component: {fileID: 1548001841}
+  - component: {fileID: 1548001840}
+  m_Layer: 0
+  m_Name: Square
+  m_TagString: Fluid
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1548001840
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548001839}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!212 &1548001841
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548001839}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
+  m_Color: {r: 0, g: 0.87080383, b: 1, a: 0.4627451}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1, y: 1}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1548001842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1548001839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.04, y: -2.24, z: 0}
+  m_LocalScale: {x: 10.031494, y: 2.8029, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1998772614
 GameObject:
@@ -5664,6 +5857,9 @@ GameObject:
   - component: {fileID: 2022438450}
   - component: {fileID: 2022438454}
   - component: {fileID: 2022438456}
+  - component: {fileID: 2022438455}
+  - component: {fileID: 2022438451}
+  - component: {fileID: 2022438457}
   m_Layer: 0
   m_Name: Walker (2)
   m_TagString: Untagged
@@ -5702,6 +5898,18 @@ MonoBehaviour:
   vel_max: 10
   bouncingness_factor: 0.474
   black_hole: {fileID: 1998772614}
+--- !u!114 &2022438451
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022438449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ff210f0474b7c542ab97351c8e258eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &2022438452
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5874,7 +6082,7 @@ TrailRenderer:
   m_MinVertexDistance: 0.12
   m_Autodestruct: 0
   m_Emitting: 1
---- !u!114 &2022438456
+--- !u!114 &2022438455
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -5882,6 +6090,57 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2022438449}
   m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe19a83a6b3705a438c02a2630d22a8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  position:
+    y: 0
+    x: 3
+  velocity:
+    y: 0
+    x: 0
+  aceleration:
+    y: 0
+    x: 0
+  max_Y_displacement: 4.5
+  max_X_displacement: 4.5
+  min_Y_displacement: -4.5
+  min_X_displacement: -4.5
+  vel_max: 100
+  bouncingness_factor: 0.935
+  force:
+    y: 0
+    x: 0
+  friction:
+    y: 0
+    x: 0
+  accumulated_force:
+    y: 0
+    x: 0
+  gravity:
+    y: -9.8
+    x: 0
+  weight:
+    y: 0
+    x: 0
+  mass: 10
+  coefficient_friction: 0
+  normal_force: 0
+  water_friction:
+    y: 0
+    x: 0
+  coefficient_fluids: 1
+  fluid_density: 1
+  frontal_area: 1
+--- !u!114 &2022438456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022438449}
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04337e9774365df41b07227d5e0f1f52, type: 3}
   m_Name: 
@@ -5904,7 +6163,7 @@ MonoBehaviour:
   force:
     y: 10
     x: 0
-  air_force:
+  friction:
     y: 0
     x: 0
   accumulated_force:
@@ -5917,3 +6176,21 @@ MonoBehaviour:
     y: 0
     x: 0
   mass: 2
+  coefficient_friction: 1
+  normal_force: 10
+--- !u!58 &2022438457
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022438449}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.32
