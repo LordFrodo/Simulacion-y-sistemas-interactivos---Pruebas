@@ -13,6 +13,7 @@ public class WaterFriction : WalkerForce
         weight.X = gravity.X * mass;
         weight.Y = gravity.Y * mass;
     }
+    
     public override void UpdatePosition()
     {
         aceleration.X = 0;
@@ -26,7 +27,8 @@ public class WaterFriction : WalkerForce
             velocity.X = -velocity.X * bouncingness_factor;
         }
         water_friction.X = -0.5f * fluid_density * velocity.X * velocity.X * frontal_area * coefficient_fluids * water_friction.Normalize(velocity).X;
-        water_friction.Y = -0.5f * fluid_density * velocity.Y * velocity.Y * frontal_area * coefficient_fluids * water_friction.Normalize(velocity).Y;
+        water_friction.Y = 0.5f * fluid_density * velocity.Y * velocity.Y * frontal_area * coefficient_fluids * water_friction.Normalize(velocity).Y;
+        Debug.Log(water_friction.Y);
         if(on_fluid)ApplyForce(water_friction);
         ApplyForce(force);
 
@@ -78,8 +80,8 @@ public class WaterFriction : WalkerForce
         }
         transform.position = new Vector3(position.X, position.Y, 0);
     }
-    public void Fluid_interaction()
+    public void Fluid_interaction(bool entering)
     {
-        on_fluid = !on_fluid;
+        on_fluid = entering;
     }
 }

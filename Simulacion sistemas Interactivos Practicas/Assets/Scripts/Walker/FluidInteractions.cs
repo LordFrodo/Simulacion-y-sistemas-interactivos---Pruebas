@@ -5,17 +5,19 @@ using System;
 
 public class FluidInteractions : MonoBehaviour
 {
-    
-    public static Action On_fluid_event;
-   
-    public void OntriggerEnter2D(Collider2D collider2D)
+    //Func <> es un action que recibe parametros
+
+    public delegate void CustomAction(bool x); //crear un action que tiene nuevos parametros y puede guardar nuevos datos
+    public static CustomAction On_fluid_event;
+
+
+    public void OnTriggerEnter2D(Collider2D collider2D)
     {
-        if(collider2D.CompareTag("Fluid")) On_fluid_event?.Invoke();
-        Debug.Log("HOLA");
+        if (collider2D.CompareTag("Player")) On_fluid_event?.Invoke(true);
     }
-    public void OntriggerExit2D(Collider2D collider2D)
+    public void OnTriggerExit2D(Collider2D collider2D)
     {
-        if (collider2D.CompareTag("Fluid")) On_fluid_event?.Invoke();
+        if (collider2D.CompareTag("Player")) On_fluid_event?.Invoke(false);
     }
     
 }
