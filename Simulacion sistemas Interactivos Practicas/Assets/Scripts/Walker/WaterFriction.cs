@@ -7,17 +7,40 @@ public class WaterFriction : WalkerForce
     [SerializeField] float coefficient_fluids, fluid_density, frontal_area;
     bool on_fluid;
     
-    public void Start()
+    private void Start()
     {
         FluidInteractions.On_fluid_event += Fluid_interaction;
         weight.X = gravity.X * mass;
         weight.Y = gravity.Y * mass;
+        position = new MyVector2D(transform.position.x, transform.position.y);
     }
-    
+
+    private void OnDestroy()
+    {
+        // Deregister/unsubscribe from static event
+        FluidInteractions.On_fluid_event -= Fluid_interaction;
+    }
+
+    private void Update()
+    {
+        UpdatePosition();
+        //position.DrawMyVector(position, Color.red);
+        //position.DrawMyVector(velocity, position, Color.blue);
+        //position.DrawMyVector(aceleration, position, Color.yellow);
+        //if (position.Y > max_Y_displacement && position.X > max_X_displacement)
+        //{
+        //    transform.position = new Vector3(5, 5, 0);
+        //}
+        transform.position = new Vector3(position.X, position.Y, 0);
+    }
+
     public override void UpdatePosition()
     {
-        aceleration.X = 0;
-        aceleration.Y = 0;
+        // Reset the accumulated force
+        accumulated_force.X = 0;
+        accumulated_force.Y = 0;
+
+        // Do some bouncing
         if (position.Y >= max_Y_displacement || position.Y <= min_Y_displacement)
         {
             velocity.Y = -velocity.Y * bouncingness_factor;
@@ -26,21 +49,28 @@ public class WaterFriction : WalkerForce
         {
             velocity.X = -velocity.X * bouncingness_factor;
         }
-        water_friction.X = -0.5f * fluid_density * velocity.X * velocity.X * frontal_area * coefficient_fluids * water_friction.Normalize(velocity).X;
-        water_friction.Y = 0.5f * fluid_density * velocity.Y * velocity.Y * frontal_area * coefficient_fluids * water_friction.Normalize(velocity).Y;
-        Debug.Log(water_friction.Y);
-        if(on_fluid)ApplyForce(water_friction);
-        ApplyForce(force);
 
-        accumulated_force = accumulated_force.Sum(accumulated_force, weight);
+        // Apply fluid resistance force
+        if (on_fluid)
+        {
+            MyVector2D dir = velocity.Normalize(velocity);
+            float speed = velocity.Magnitude_Calculate(velocity);
+            float scalarPart = -0.5f * fluid_density * speed * speed * frontal_area * coefficient_fluids;
+            water_friction = dir.Multiply_Constant(scalarPart, dir);
+            ApplyForce(water_friction);
+        }
+
+        // Add weight to total forces
+        ApplyForce(weight);
+
+        // Set the acceleration, accumulated force is F=m/a -> a=F/m
         aceleration = accumulated_force;
-        //Acelera el vector velocidad
+
+        // Acelera el vector velocidad
         velocity.Y += aceleration.Y * Time.deltaTime;
         velocity.X += aceleration.X * Time.deltaTime;
 
-
-
-        //Ajuste Vel max
+        // Ajuste Vel max
         velocity.Magnitude_Calculate(velocity);
         if (velocity.Magnitude > vel_max)
         {
@@ -48,7 +78,7 @@ public class WaterFriction : WalkerForce
             velocity = velocity.Multiply_Constant(vel_max, velocity);
         }
 
-        //Agrego velocidad
+        // Agrego velocidad
         position.Y += velocity.Y * Time.deltaTime;
         position.X += velocity.X * Time.deltaTime;
         if (position.Y > max_Y_displacement)
@@ -68,20 +98,10 @@ public class WaterFriction : WalkerForce
             position.Y = min_Y_displacement;
         }
     }
-    private void Update()
-    {
-        UpdatePosition();
-        position.DrawMyVector(position, Color.red);
-        position.DrawMyVector(velocity, position, Color.blue);
-        position.DrawMyVector(aceleration, position, Color.yellow);
-        if (position.Y > max_Y_displacement && position.X > max_X_displacement)
-        {
-            transform.position = new Vector3(5, 5, 0);
-        }
-        transform.position = new Vector3(position.X, position.Y, 0);
-    }
+
     public void Fluid_interaction(bool entering)
     {
+        Debug.Log("fluid");
         on_fluid = entering;
     }
 }

@@ -14,7 +14,7 @@ public class WalkerForce : Walker
     }
     public void ApplyForce(MyVector2D force)
     {
-        accumulated_force.X += force.X/mass;
+        accumulated_force.X += force.X / mass;
         accumulated_force.Y += force.Y / mass;
     }
     public override void UpdatePosition()

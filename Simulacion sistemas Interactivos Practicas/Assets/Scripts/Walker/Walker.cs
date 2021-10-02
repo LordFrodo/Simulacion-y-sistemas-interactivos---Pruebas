@@ -9,8 +9,6 @@ public class Walker : MonoBehaviour
     [Range(0, 1)]
     [SerializeField] protected float bouncingness_factor;
 
-    // Start is called before the first frame update
-
     // Update is called once per frame
     void Update()
     {
