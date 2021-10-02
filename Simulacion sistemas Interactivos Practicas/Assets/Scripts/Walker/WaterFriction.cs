@@ -101,7 +101,6 @@ public class WaterFriction : WalkerForce
 
     public void Fluid_interaction(bool entering)
     {
-        Debug.Log("fluid");
         on_fluid = entering;
     }
 }
