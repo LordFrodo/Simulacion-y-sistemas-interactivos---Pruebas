@@ -244,7 +244,7 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -253,16 +253,21 @@ MonoBehaviour:
       outWeight: 0
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: -0.09436606
-      outSlope: -0.09436606
+      value: 1
+      inSlope: 0
+      outSlope: 0
       tangentMode: 0
       weightedMode: 0
-      inWeight: 0.06960559
+      inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  angular_speed: 0
+  angular_acceleration: 5
+  radial_speed: 0
+  radial_acceleration: -0.5
+  screen_radius: 5
   radius: 3
   duration: 15
   raduis_magnitude: 10

@@ -6,18 +6,40 @@ public class PolarToCartesian : MonoBehaviour
 {
     [Header("Coordenadas")]
     public Vector2 polar_coord, cartesian_coord;
+    [Header("Curva de animacion")]
     [SerializeField] AnimationCurve curve;
-    
-    public float radius, duration, raduis_magnitude, angle_magnitud;
+    [Header("Angular Speed")]
+    public float angular_speed;
+    public float angular_acceleration;
+    [Header("Radial Speed")]
+    public float radial_speed;
+    public float radial_acceleration;
+    [Header("Limites pantalla")]
+    public float screen_radius;
+    [Header("Variables Movimiento con curva")]
+    public float radius;
+    public float duration;
+    public float raduis_magnitude;
+    public float angle_magnitud;
     float t, time;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
+        /* Crecimiento de la espiral debido a la curva hecha en el inspector
         time += Time.deltaTime;
         t = time / duration;
         radius = curve.Evaluate(t)*raduis_magnitude;
-        polar_coord.y = curve.Evaluate(t)*angle_magnitud;
+        polar_coord.y = curve.Evaluate(t)*angle_magnitud;*/
+        if (Mathf.Abs(radius) > screen_radius)
+        {
+            radial_acceleration = -radial_acceleration;
+        }
+        //Crecimiento de la espiral por medio de aceleracion y velocidad
+        angular_speed += angular_acceleration * Time.deltaTime;
+        radial_speed += radial_acceleration * Time.deltaTime;
+        radius = radial_speed;
+        polar_coord.y = angular_speed;
         polar_coord.x = radius;
         cartesian_coord = PolarToCartesianCoord(polar_coord);
         transform.position = cartesian_coord;
