@@ -17,11 +17,12 @@ public class MyCustomLookAt : MonoBehaviour
         mouseposition.Draw(Color.white);
         transform.rotation = LookAt(mouseposition, transform.position);
     }
-    private Vector3 GetWorldMousePosition()
+    public  static Vector3 GetWorldMousePosition()
     {
         Camera camera = Camera.main;
         Vector3 screenPos = new Vector3(Input.mousePosition.x, Input.mousePosition.y, camera.nearClipPlane);
         Vector3 worldPos = Camera.main.ScreenToWorldPoint(screenPos);
+        worldPos.z = 0;
         return worldPos;
     }
     private static Quaternion RotateZ(float radians)
@@ -32,5 +33,10 @@ public class MyCustomLookAt : MonoBehaviour
     {
         float angle = Mathf.Atan2(position.y-origin.y, position.x-origin.x);
         return RotateZ(angle);      
+    }
+    public static Quaternion LookAt(Vector3 position)
+    {
+        float angle = Mathf.Atan2(position.y, position.x);
+        return RotateZ(angle);
     }
 }
