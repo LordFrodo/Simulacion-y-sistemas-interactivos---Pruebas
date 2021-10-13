@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class Wave : MonoBehaviour
 {
-    public List<GameObject> circles;
+    List<GameObject> circles = new List<GameObject>();
     [Header("Cantidad de circulos")]
     [SerializeField] int howManyCircles;
     [Header("Valores de la ola")]
     [Range(1, 5)]
     [SerializeField] float amplitude;
     [SerializeField] float speed;
+    [SerializeField] float factor;
     [Header("Objeto")]
     [SerializeField] GameObject prefab;
     // Start is called before the first frame update
@@ -30,7 +31,7 @@ public class Wave : MonoBehaviour
         {
             var circle = circles[i];
             float x = 0.6f * i;
-            float y = amplitude * Mathf.Sin(Time.time * speed + i);
+            float y = amplitude*Mathf.Sin(i*factor+Time.time*speed);
             circle.transform.localPosition = new Vector3(x, y);
         }
     }
