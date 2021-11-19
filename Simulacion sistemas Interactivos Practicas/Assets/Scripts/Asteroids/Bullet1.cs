@@ -6,16 +6,28 @@ using UnityEngine;
 public class Bullet1 : MonoBehaviour
 {
     Rigidbody2D rg;
-    Vector3 direction;
-    float force;
-    
+    [SerializeField] float force;
+    [SerializeField] float bullet_duration;
 
+    private void OnEnable()
+    {
+        StartCoroutine("RetunrToPool");
+    }
+    public IEnumerator RetunrToPool()
+    {
+        yield return new WaitForSeconds(bullet_duration);
+        PoolMuniciones.instance.Return(gameObject);
+    }
+    private void Update()
+    {
+        //transform.localPosition += transform.up/10;
+        transform.localPosition += Shoots.direction.normalized/10;
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-    private void OnTriggerStay(Collider other)
-    {
-        
+        if (collision.CompareTag("Asteroid"))
+        {
+            PoolMuniciones.instance.Return(gameObject);
+        }
     }
 }

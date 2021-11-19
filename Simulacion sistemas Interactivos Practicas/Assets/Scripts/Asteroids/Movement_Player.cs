@@ -24,7 +24,7 @@ public class Movement_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) AddForce(state);
+        if (Input.GetKeyDown(KeyCode.Space)&&GameManager.instance.inGame) AddForce(state);
         time += Time.deltaTime;
         if (time > 0.5)
         {
