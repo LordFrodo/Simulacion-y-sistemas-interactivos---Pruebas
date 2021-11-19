@@ -28,8 +28,9 @@ public class Asteoird : MonoBehaviour
         tiempo += Time.deltaTime;
         if (tiempo > 0.8) ps.Pause();
         transform.localPosition += transform.up/40;
-        if (transform.position.x <= -5||transform.position.x>=5) transform.position = new Vector3(-transform.position.x, transform.position.y,0);
-        if (transform.position.y <= -5 || transform.position.y >= 5) transform.position = new Vector3(transform.position.x,-transform.position.y, 0);
+        if (transform.position.x <= -7||transform.position.x>=7) transform.position = new Vector3(-transform.position.x, transform.position.y,0);
+        if (transform.position.y <= -7 || transform.position.y >= 7) transform.position = new Vector3(transform.position.x,-transform.position.y, 0);
+        if(GameManager.instance.inGame==false) PoolMuniciones.instance.Return(gameObject);
 
     }
     private void OnTriggerEnter2D(Collider2D collision)

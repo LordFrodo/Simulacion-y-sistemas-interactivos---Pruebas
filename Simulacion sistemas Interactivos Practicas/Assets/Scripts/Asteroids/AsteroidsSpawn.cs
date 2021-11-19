@@ -19,8 +19,17 @@ public class AsteroidsSpawn : MonoBehaviour
         {  
             if(cantidad_spawneada < cantidad)
             {
-                PoolAsteroids.instance.Get().transform.position = new Vector3(Random.Range(-5f, 5f), Random.Range(-5f, 5f), 0);
-                PoolAsteroids.instance.Get().transform.rotation = Quaternion.Euler(new Vector3(Random.Range(0f, 360f), Random.Range(0f, 360f), 0));
+                if (Random.value > 0.5f)
+                {
+                    PoolAsteroids.instance.Get().transform.position = new Vector3(-7,7, 0);
+                    PoolAsteroids.instance.Get().transform.rotation = Quaternion.Euler(new Vector3(0, 0, Random.Range(0f, 360f)));
+                }
+                else
+                {
+                    PoolAsteroids.instance.Get().transform.position = new Vector3(7,-7, 0);
+                    PoolAsteroids.instance.Get().transform.rotation = Quaternion.Euler(new Vector3(0,0, Random.Range(0f, 360f)));
+                }
+               
                 cantidad_spawneada++;            
             }    
         }
