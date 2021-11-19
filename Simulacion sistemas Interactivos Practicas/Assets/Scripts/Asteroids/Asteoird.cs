@@ -11,12 +11,12 @@ public class Asteoird : MonoBehaviour
 
     private void Start()
     {
-        ps.GetComponent<ParticleSystem>();
+        //ps.GetComponent<ParticleSystem>();
     }
     private void OnEnable()
     {
         StartCoroutine("RetunrToPool");
-        ps.Play();
+        //ps.Play();
     }
     public IEnumerator RetunrToPool()
     {
@@ -25,8 +25,8 @@ public class Asteoird : MonoBehaviour
     }
     private void Update()
     {
-        tiempo += Time.deltaTime;
-        if (tiempo > 0.8) ps.Pause();
+        //tiempo += Time.deltaTime;
+        //if (tiempo > 0.8) ps.Pause();
         transform.localPosition += transform.up/40;
         if (transform.position.x <= -7||transform.position.x>=7) transform.position = new Vector3(-transform.position.x, transform.position.y,0);
         if (transform.position.y <= -7 || transform.position.y >= 7) transform.position = new Vector3(transform.position.x,-transform.position.y, 0);
@@ -37,8 +37,7 @@ public class Asteoird : MonoBehaviour
     {
         if (collision.CompareTag("Bullet"))
         {
-            new WaitForSeconds(1);
-            ps.Play();
+            //ps.Play();
             PoolMuniciones.instance.Return(gameObject);
             GameManager.instance.AddPoint();
         }
