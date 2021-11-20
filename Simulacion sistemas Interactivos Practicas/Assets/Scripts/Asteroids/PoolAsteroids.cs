@@ -5,6 +5,7 @@ using UnityEngine;
 public class PoolAsteroids : MonoBehaviour
 {
     public static PoolAsteroids instance { get; private set; }
+    public int ActiveCount = 0;
     [SerializeField] GameObject prefab;
     [SerializeField] int initial_amount;
     List<GameObject> list_aseteroids = new List<GameObject>();
@@ -24,6 +25,7 @@ public class PoolAsteroids : MonoBehaviour
             list_aseteroids.Add(temp);
         }
     }
+
     public GameObject Get()
     {
         GameObject ret;
@@ -37,11 +39,14 @@ public class PoolAsteroids : MonoBehaviour
             ret = Instantiate(prefab);
         }
         ret.SetActive(true);
+        ++ActiveCount;
         return ret;
     }
+
     public void Return(GameObject bullet)
     {
         bullet.SetActive(false);
         list_aseteroids.Add(bullet);
+        --ActiveCount;
     }
 }

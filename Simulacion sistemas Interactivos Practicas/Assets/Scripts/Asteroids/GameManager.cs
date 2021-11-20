@@ -7,11 +7,12 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 { 
     public static GameManager instance { get; private set; }
-    public bool inGame,dead;
+    public bool inGame, dead;
     [SerializeField] Text text_points, text_lvl;
     [SerializeField] AsteroidsSpawn spawner;
     public int lvl, points;
     [SerializeField] GameObject boton_start, reset_buton;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -27,12 +28,15 @@ public class GameManager : MonoBehaviour
             text_lvl.gameObject.SetActive(true);
             text_points.text = ("Current point: " + points);
             text_lvl.text = ("Current Lvl: " + lvl);
-            if (points > 30 * lvl)
+            
+            // if (points > 30 * lvl)
+            if (PoolAsteroids.instance.ActiveCount == 0)
             {
-                lvl++;
+                ++lvl;
                 spawner.ChangeLvl();
             }
         }
+
         if(dead)
         {
             text_points.gameObject.SetActive(false);
@@ -40,10 +44,12 @@ public class GameManager : MonoBehaviour
             reset_buton.SetActive(true);
         }
     }
+
     public void AddPoint()
     {
         points++;
     }
+
     public void StartGame()
     {
         lvl = 1;
@@ -51,6 +57,7 @@ public class GameManager : MonoBehaviour
         inGame = true;
         boton_start.SetActive(false);
     }
+
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

@@ -24,13 +24,17 @@ public class Movement_Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)&&GameManager.instance.inGame) AddForce(state);
+        if (Input.GetKeyDown(KeyCode.Space) && GameManager.instance.inGame) AddForce(state);
+
         time += Time.deltaTime;
         if (time > 0.5)
         {
             turbo.SetActive(false);
             state = 1;
         }
+
+        if (transform.position.x <= -5.5 || transform.position.x >= 5.5) transform.position = new Vector3(-transform.position.x, transform.position.y, 0);
+        if (transform.position.y <= -5.5 || transform.position.y >= 5.5) transform.position = new Vector3(transform.position.x, -transform.position.y, 0);
     }
     public void AddForce(int x)
     {

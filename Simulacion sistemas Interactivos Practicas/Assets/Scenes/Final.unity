@@ -5454,7 +5454,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 7636770667208539315, guid: fbfd6b6e9f6bc8e4d89b10fa4811e990, type: 3}
-  initial_amount: 100
+  initial_amount: 10
 --- !u!4 &545654242
 Transform:
   m_ObjectHideFlags: 0
@@ -5482,7 +5482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 2502143015280459780, guid: 721ca8dccbc650246bce2ade5c984efd, type: 3}
-  initial_amount: 100
+  initial_amount: 0
 --- !u!1 &807291328
 GameObject:
   m_ObjectHideFlags: 0
@@ -5548,7 +5548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aceb942db0a35d548ac5dd7d5ab235ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cantidad: 5
+  cantidad: 8
   lvl_spawn: 0
 --- !u!1 &904976778
 GameObject:
@@ -5632,7 +5632,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 904976778}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.71, y: 3.71, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 22851131}
